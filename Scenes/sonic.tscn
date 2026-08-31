@@ -1,0 +1,161 @@
+[gd_scene format=3 uid="uid://bhxbt2lwl5k20"]
+
+[ext_resource type="Texture2D" uid="uid://ca2t6x88r5b0w" path="res://Sprites/Game Gear - Sonic Chaos - Playable Characters - Sonic (1).png" id="1_57ld5"]
+[ext_resource type="Script" uid="uid://bgwnrc4lwschu" path="res://Scripts/sonic.gd" id="1_jxrfq"]
+[ext_resource type="FontFile" uid="uid://dlgt36vogakmo" path="res://Fonts/sonic-genesis-mega-drive-font.otf" id="3_dx0d7"]
+[ext_resource type="Script" uid="uid://c33x6v88usl6r" path="res://Scenes/ring_tracker.gd" id="3_lpnvh"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jxrfq"]
+radius = 9.0
+height = 34.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jxrfq"]
+radius = 12.0
+
+[sub_resource type="Animation" id="Animation_yuqoc"]
+resource_name = "Crouch"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite Sheet:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(697, 0, 25, 40)]
+}
+
+[sub_resource type="Animation" id="Animation_jxrfq"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite Sheet:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(370, 0, 25, 40)]
+}
+
+[sub_resource type="Animation" id="Animation_eeu7w"]
+resource_name = "Jump"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite Sheet:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Rect2(510, 48, 20, 25), Rect2(545, 48, 22, 25), Rect2(580, 48, 22, 25), Rect2(617, 48, 22, 25), Rect2(652, 48, 23, 25)]
+}
+
+[sub_resource type="Animation" id="Animation_lpnvh"]
+resource_name = "Look Up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite Sheet:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(656, 0, 25, 40)]
+}
+
+[sub_resource type="Animation" id="Animation_xxe3p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite Sheet:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(370, 0, 25, 40)]
+}
+
+[sub_resource type="Animation" id="Animation_0qcmw"]
+resource_name = "Walk"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite Sheet:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Rect2(3, 0, 32, 40), Rect2(40, 0, 32, 40), Rect2(75, 0, 32, 40), Rect2(113, 0, 32, 40)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xxe3p"]
+_data = {
+&"Crouch": SubResource("Animation_yuqoc"),
+&"Idle": SubResource("Animation_jxrfq"),
+&"Jump": SubResource("Animation_eeu7w"),
+&"Look Up": SubResource("Animation_lpnvh"),
+&"RESET": SubResource("Animation_xxe3p"),
+&"Walk": SubResource("Animation_0qcmw")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yuqoc"]
+radius = 13.0
+
+[node name="Sonic" type="CharacterBody2D" unique_id=909022342 node_paths=PackedStringArray("sprite", "animator", "normal", "ball", "attack_area")]
+script = ExtResource("1_jxrfq")
+sprite = NodePath("Sprite Sheet")
+animator = NodePath("AnimationPlayer")
+normal = NodePath("Normal")
+ball = NodePath("Ball")
+attack_area = NodePath("Attack Area/CollisionShape2D")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1922561309]
+position = Vector2(-1, -1)
+zoom = Vector2(2.5, 2.5)
+
+[node name="Normal" type="CollisionShape2D" parent="." unique_id=1938055724]
+shape = SubResource("CapsuleShape2D_jxrfq")
+
+[node name="Ball" type="CollisionShape2D" parent="." unique_id=2094677613]
+shape = SubResource("CircleShape2D_jxrfq")
+
+[node name="Sprite Sheet" type="Sprite2D" parent="." unique_id=1292098526]
+texture = ExtResource("1_57ld5")
+region_enabled = true
+region_rect = Rect2(370, 0, 25, 40)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1659215965]
+libraries/ = SubResource("AnimationLibrary_xxe3p")
+
+[node name="Attack Area" type="Area2D" parent="." unique_id=1313386413]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack Area" unique_id=349295790]
+shape = SubResource("CircleShape2D_yuqoc")
+
+[node name="Ring Tracker" type="Label" parent="." unique_id=694625820]
+offset_left = -227.0
+offset_top = -126.0
+offset_right = -181.0
+offset_bottom = -103.0
+theme_override_fonts/font = ExtResource("3_dx0d7")
+theme_override_font_sizes/font_size = 16
+text = "RINGS:"
+script = ExtResource("3_lpnvh")
+
+[connection signal="area_entered" from="Attack Area" to="." method="_on_attack_area_area_entered"]

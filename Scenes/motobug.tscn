@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cbtf1jlrbrhrr"]
+
+[ext_resource type="Script" uid="uid://bhxks0dvs1ttl" path="res://Scripts/motobug.gd" id="1_akdcm"]
+[ext_resource type="Texture2D" uid="uid://btoylajju13lv" path="res://Sprites/Game Gear - Sonic the Hedgehog - Enemies & Bosses - Badniks (1).png" id="2_40bdi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5wb17"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_akdcm"]
+radius = 8.666667
+
+[node name="Motobug" type="CharacterBody2D" unique_id=1754486803]
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_akdcm")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1444092744]
+texture = ExtResource("2_40bdi")
+region_enabled = true
+region_rect = Rect2(150, 7, 18, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1714974423]
+position = Vector2(0.6666665, -0.66666603)
+shape = SubResource("CircleShape2D_5wb17")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=632588199]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1087458050]
+position = Vector2(0.66666603, -0.66666603)
+shape = SubResource("CircleShape2D_akdcm")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

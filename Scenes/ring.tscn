@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://bmb7rpa2w34ok"]
+
+[ext_resource type="Script" uid="uid://vidwld5qj2oj" path="res://Scripts/ring.gd" id="1_hvk7o"]
+[ext_resource type="Texture2D" uid="uid://d1onbfb1r1s7e" path="res://Sprites/rings.png" id="2_4cumv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jiui3"]
+radius = 14.0
+
+[sub_resource type="Animation" id="Animation_4cumv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(4, 4, 57, 57)]
+}
+
+[sub_resource type="Animation" id="Animation_hvk7o"]
+resource_name = "Ring"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Rect2(4, 4, 57, 57), Rect2(69, 4, 57, 57), Rect2(133, 4, 57, 57), Rect2(197, 4, 57, 57), Rect2(260, 4, 57, 57), Rect2(324, 4, 57, 57), Rect2(388, 4, 57, 57), Rect2(452, 4, 57, 57)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4cumv"]
+_data = {
+&"RESET": SubResource("Animation_4cumv"),
+&"Ring": SubResource("Animation_hvk7o")
+}
+
+[node name="Ring" type="StaticBody2D" unique_id=950211483 node_paths=PackedStringArray("animator")]
+scale = Vector2(0.75, 0.75)
+script = ExtResource("1_hvk7o")
+animator = NodePath("AnimationPlayer")
+
+[node name="ring" type="Area2D" parent="." unique_id=1412169340]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ring" unique_id=1698880428]
+shape = SubResource("CircleShape2D_jiui3")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1870186924]
+position = Vector2(0.49999982, 0.49999982)
+scale = Vector2(0.50877196, 0.50877196)
+texture = ExtResource("2_4cumv")
+region_enabled = true
+region_rect = Rect2(4, 4, 57, 57)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=521544256]
+libraries/ = SubResource("AnimationLibrary_4cumv")
+
+[connection signal="area_entered" from="ring" to="." method="_on_area_2d_area_entered"]
