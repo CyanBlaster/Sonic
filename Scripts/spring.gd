@@ -1,15 +1,9 @@
 extends StaticBody2D
 
-
-
-@export var animator : AnimationPlayer
-
-
+@export var animator: AnimationPlayer
 func _process(_delta: float) -> void:
-	animator.play("Ring")
-
+	pass
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if(area.name.begins_with("Ring Collector")):
-		global.rings += 1
-		queue_free()
+		animator.play("Spring")

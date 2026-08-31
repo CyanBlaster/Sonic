@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://bti1dahkgfcas"]
+
+[ext_resource type="Script" uid="uid://mr7d3w10hj5v" path="res://Scripts/spring.gd" id="1_boyml"]
+[ext_resource type="Texture2D" uid="uid://dfc6s4ypaqsao" path="res://Sprites/Game Gear - Sonic Chaos - Miscellaneous - Miscellaneous Sprites (1).png" id="1_ka4py"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_boyml"]
+size = Vector2(15, 9.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hpppm"]
+size = Vector2(15, 8.5)
+
+[sub_resource type="Animation" id="Animation_boyml"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 135, 15, 10)]
+}
+
+[sub_resource type="Animation" id="Animation_hpppm"]
+resource_name = "Spring"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Rect2(0, 135, 15, 10), Rect2(16, 131, 15, 15), Rect2(32, 120, 15, 25), Rect2(49, 115, 14, 30), Rect2(0, 135, 15, 10)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gvkgp"]
+_data = {
+&"RESET": SubResource("Animation_boyml"),
+&"Spring": SubResource("Animation_hpppm")
+}
+
+[node name="Spring" type="StaticBody2D" unique_id=260580850 node_paths=PackedStringArray("animator")]
+script = ExtResource("1_boyml")
+animator = NodePath("AnimationPlayer")
+
+[node name="Spring" type="Area2D" parent="." unique_id=1751262101]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spring" unique_id=1837624183]
+position = Vector2(0, -0.25)
+shape = SubResource("RectangleShape2D_boyml")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1273873001]
+position = Vector2(0, -0.25)
+shape = SubResource("RectangleShape2D_hpppm")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1737756175]
+texture = ExtResource("1_ka4py")
+region_enabled = true
+region_rect = Rect2(0, 135, 15, 10)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2048370338]
+libraries/ = SubResource("AnimationLibrary_gvkgp")
+
+[connection signal="area_entered" from="Spring" to="." method="_on_area_2d_area_entered"]

@@ -9,9 +9,10 @@ radius = 8.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_akdcm"]
 radius = 8.666667
 
-[node name="Motobug" type="CharacterBody2D" unique_id=1754486803]
+[node name="Motobug" type="CharacterBody2D" unique_id=1754486803 node_paths=PackedStringArray("sprite")]
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_akdcm")
+sprite = NodePath("Sprite")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1444092744]
 texture = ExtResource("2_40bdi")
@@ -22,11 +23,11 @@ region_rect = Rect2(150, 7, 18, 20)
 position = Vector2(0.6666665, -0.66666603)
 shape = SubResource("CircleShape2D_5wb17")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=632588199]
+[node name="motobug" type="Area2D" parent="." unique_id=632588199]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1087458050]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="motobug" unique_id=1087458050]
 position = Vector2(0.66666603, -0.66666603)
 shape = SubResource("CircleShape2D_akdcm")
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="area_entered" from="motobug" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="motobug" to="." method="_on_area_2d_body_entered"]

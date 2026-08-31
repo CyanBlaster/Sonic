@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://doki8p05fcx53"]
+
+[ext_resource type="Script" uid="uid://r0u7qpgb5w4h" path="res://Scripts/ring_monitor.gd" id="1_4vgk1"]
+[ext_resource type="Texture2D" uid="uid://dfc6s4ypaqsao" path="res://Sprites/Game Gear - Sonic Chaos - Miscellaneous - Miscellaneous Sprites (1).png" id="2_4vgk1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4vgk1"]
+size = Vector2(25, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8my20"]
+size = Vector2(21, 23)
+
+[node name="Ring Monitor" type="CharacterBody2D" unique_id=1803186731]
+script = ExtResource("1_4vgk1")
+
+[node name="monitor" type="Area2D" parent="." unique_id=535016953]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="monitor" unique_id=846614513]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_4vgk1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1560819847]
+position = Vector2(0.5, 1.5)
+shape = SubResource("RectangleShape2D_8my20")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1694017915]
+position = Vector2(0, 1)
+texture = ExtResource("2_4vgk1")
+region_enabled = true
+region_rect = Rect2(0, 56, 23, 24)
+
+[connection signal="area_entered" from="monitor" to="." method="_on_area_2d_area_entered"]

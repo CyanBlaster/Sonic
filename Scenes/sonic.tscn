@@ -3,7 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://ca2t6x88r5b0w" path="res://Sprites/Game Gear - Sonic Chaos - Playable Characters - Sonic (1).png" id="1_57ld5"]
 [ext_resource type="Script" uid="uid://bgwnrc4lwschu" path="res://Scripts/sonic.gd" id="1_jxrfq"]
 [ext_resource type="FontFile" uid="uid://dlgt36vogakmo" path="res://Fonts/sonic-genesis-mega-drive-font.otf" id="3_dx0d7"]
-[ext_resource type="Script" uid="uid://c33x6v88usl6r" path="res://Scenes/ring_tracker.gd" id="3_lpnvh"]
+[ext_resource type="Script" uid="uid://c33x6v88usl6r" path="res://Scripts/ring_tracker.gd" id="3_lpnvh"]
+[ext_resource type="Script" uid="uid://cqwm4wkab71iw" path="res://Scripts/score_tracker.gd" id="5_cktjp"]
+[ext_resource type="Script" uid="uid://btgognghfnv2g" path="res://Scripts/time_tracker.gd" id="5_m6bsv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jxrfq"]
 radius = 9.0
@@ -117,6 +119,9 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_yuqoc"]
 radius = 13.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m6bsv"]
+height = 36.0
+
 [node name="Sonic" type="CharacterBody2D" unique_id=909022342 node_paths=PackedStringArray("sprite", "animator", "normal", "ball", "attack_area")]
 script = ExtResource("1_jxrfq")
 sprite = NodePath("Sprite Sheet")
@@ -148,14 +153,39 @@ libraries/ = SubResource("AnimationLibrary_xxe3p")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack Area" unique_id=349295790]
 shape = SubResource("CircleShape2D_yuqoc")
 
+[node name="Score Tracker" type="Label" parent="." unique_id=491079766]
+offset_left = -228.0
+offset_top = -130.0
+offset_right = -180.0
+offset_bottom = -107.0
+theme_override_fonts/font = ExtResource("3_dx0d7")
+theme_override_font_sizes/font_size = 16
+text = "SCORE:"
+script = ExtResource("5_cktjp")
+
+[node name="Time Tracker" type="Label" parent="." unique_id=1771998271]
+offset_left = -228.0
+offset_top = -117.0
+offset_right = -188.0
+offset_bottom = -94.0
+theme_override_fonts/font = ExtResource("3_dx0d7")
+theme_override_font_sizes/font_size = 16
+text = "TIME:"
+script = ExtResource("5_m6bsv")
+
 [node name="Ring Tracker" type="Label" parent="." unique_id=694625820]
-offset_left = -227.0
-offset_top = -126.0
+offset_left = -228.0
+offset_top = -104.0
 offset_right = -181.0
-offset_bottom = -103.0
+offset_bottom = -81.0
 theme_override_fonts/font = ExtResource("3_dx0d7")
 theme_override_font_sizes/font_size = 16
 text = "RINGS:"
 script = ExtResource("3_lpnvh")
+
+[node name="Ring Collector" type="Area2D" parent="." unique_id=1305914181]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ring Collector" unique_id=609305394]
+shape = SubResource("CapsuleShape2D_m6bsv")
 
 [connection signal="area_entered" from="Attack Area" to="." method="_on_attack_area_area_entered"]

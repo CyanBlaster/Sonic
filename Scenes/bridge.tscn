@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://cx0auarctk4b5"]
+
+[ext_resource type="Texture2D" uid="uid://w2lmx8pgxy45" path="res://Sprites/Bridge Parts.png" id="1_an2wo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jvmcf"]
+size = Vector2(158, 32)
+
+[node name="Bridge" type="StaticBody2D" unique_id=1618404006]
+
+[node name="BridgeParts" type="Sprite2D" parent="." unique_id=1198266434]
+texture = ExtResource("1_an2wo")
+region_enabled = true
+region_rect = Rect2(83, 20, 32, 32)
+
+[node name="BridgeParts2" type="Sprite2D" parent="." unique_id=911399428]
+position = Vector2(126, 0)
+texture = ExtResource("1_an2wo")
+region_enabled = true
+region_rect = Rect2(83, 20, 32, 32)
+
+[node name="BridgeParts3" type="Sprite2D" parent="." unique_id=1781852659]
+position = Vector2(95, 0)
+texture = ExtResource("1_an2wo")
+region_enabled = true
+region_rect = Rect2(83, 20, 32, 32)
+
+[node name="BridgeParts4" type="Sprite2D" parent="." unique_id=1078130224]
+position = Vector2(63, 0)
+texture = ExtResource("1_an2wo")
+region_enabled = true
+region_rect = Rect2(83, 20, 32, 32)
+
+[node name="BridgeParts5" type="Sprite2D" parent="." unique_id=597838379]
+position = Vector2(32, 0)
+texture = ExtResource("1_an2wo")
+region_enabled = true
+region_rect = Rect2(83, 20, 32, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=852487017]
+position = Vector2(63, 0)
+shape = SubResource("RectangleShape2D_jvmcf")

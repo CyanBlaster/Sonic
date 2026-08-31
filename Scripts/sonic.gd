@@ -2,8 +2,6 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
-
-
 @export var sprite : Sprite2D
 @export var animator : AnimationPlayer
 @export var normal : CollisionShape2D
@@ -16,13 +14,7 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		animator.play("Jump")
 		velocity += get_gravity() * delta
-		normal.disabled = true
-		ball.disabled = false
-		attack_area.disabled = false
-	else:
-		normal.disabled = false
-		ball.disabled = true
-		attack_area.disabled = true
+		
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 	var direction := Input.get_axis("ui_left", "ui_right")
@@ -47,9 +39,21 @@ func _physics_process(delta: float) -> void:
 		sprite.flip_h = false
 	elif(direction < 0):
 		sprite.flip_h = true
+	if not is_on_floor():
+		normal.disabled = true
+		ball.disabled = false
+		attack_area.disabled = false
+	elif direction && Input.is_action_pressed("ui_down"):
+		normal.disabled = true
+		ball.disabled = false
+		attack_area.disabled = false
+	else:
+		normal.disabled = false
+		ball.disabled = true
+		attack_area.disabled = true
 	move_and_slide()
 func _on_attack_area_area_entered(area: Area2D) -> void:
-	if area.name.begins_with("ring"):
-		global.rings += 1
-	else:
+	if area.name.begins_with("Spring"):
+		velocity.y = 1.4 * JUMP_VELOCITY
+	elif area.name.begins_with("motobug") || area.name.begins_with("monitor"):
 		velocity.y = JUMP_VELOCITY
