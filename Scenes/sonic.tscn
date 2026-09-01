@@ -90,6 +90,21 @@ tracks/0/keys = {
 "values": [Rect2(370, 0, 25, 40)]
 }
 
+[sub_resource type="Animation" id="Animation_m6bsv"]
+resource_name = "Spindash"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite Sheet:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33, 0.67),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Rect2(403, 46, 30, 25), Rect2(437, 46, 30, 25), Rect2(475, 46, 30, 25)]
+}
+
 [sub_resource type="Animation" id="Animation_0qcmw"]
 resource_name = "Walk"
 length = 0.5
@@ -113,6 +128,7 @@ _data = {
 &"Jump": SubResource("Animation_eeu7w"),
 &"Look Up": SubResource("Animation_lpnvh"),
 &"RESET": SubResource("Animation_xxe3p"),
+&"Spindash": SubResource("Animation_m6bsv"),
 &"Walk": SubResource("Animation_0qcmw")
 }
 

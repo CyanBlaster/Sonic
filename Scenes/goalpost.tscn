@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://de07pfrcq7abf"]
+
+[ext_resource type="Texture2D" uid="uid://dfc6s4ypaqsao" path="res://Sprites/Game Gear - Sonic Chaos - Miscellaneous - Miscellaneous Sprites (1).png" id="1_p4pkh"]
+[ext_resource type="Script" uid="uid://2xhx8efud1tj" path="res://Scripts/goalpost.gd" id="1_qoela"]
+
+[sub_resource type="Animation" id="Animation_dgep0"]
+resource_name = "Clear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Rect2(0, 0, 32, 48), Rect2(160, 0, 32, 48), Rect2(192, 0, 32, 48), Rect2(224, 0, 32, 48), Rect2(256, 0, 32, 48), Rect2(288, 0, 32, 48), Rect2(320, 0, 32, 48), Rect2(352, 0, 32, 48), Rect2(128, 0, 32, 48)]
+}
+
+[sub_resource type="Animation" id="Animation_04fxb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 32, 48)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x0lqb"]
+_data = {
+&"Clear": SubResource("Animation_dgep0"),
+&"RESET": SubResource("Animation_04fxb")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ljsdh"]
+size = Vector2(30, 42)
+
+[node name="goalpost" type="StaticBody2D" unique_id=360946107 node_paths=PackedStringArray("animator")]
+script = ExtResource("1_qoela")
+animator = NodePath("AnimationPlayer")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=814074517]
+texture = ExtResource("1_p4pkh")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 48)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1640600346]
+libraries/ = SubResource("AnimationLibrary_x0lqb")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=210084283]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1657991523]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_ljsdh")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

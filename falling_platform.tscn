@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://r5h5at7ghcrc"]
+
+[ext_resource type="Script" uid="uid://cq4lt0mwofy1x" path="res://falling_platform.gd" id="1_3bb5w"]
+[ext_resource type="Texture2D" uid="uid://cihnxisrkdxxf" path="res://Sprites/green_hill_zone_tileset_by_supersonic1009_d7zovt5 (1).png" id="1_iq02c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_acb21"]
+size = Vector2(53, 27)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5yqql"]
+size = Vector2(53, 29)
+
+[node name="falling_platform" type="CharacterBody2D" unique_id=306306581]
+script = ExtResource("1_3bb5w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1972553169]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_acb21")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=449664032]
+texture = ExtResource("1_iq02c")
+region_enabled = true
+region_rect = Rect2(230, 370, 54, 30)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=374209174]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1505284690]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_5yqql")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
