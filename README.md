@@ -1,4 +1,4 @@
-<a id="Sonic-top"></a>
+# Sonic The Hedgehog
 
 A remake of the iconic Sonic the Hedgehog game! Run, Jump, and spindash through the levels!
 
